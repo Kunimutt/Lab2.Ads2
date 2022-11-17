@@ -1,0 +1,90 @@
+﻿@model Lab2.Ads2.Models.ViewModelAdsAnnonsor
+
+@{
+    ViewData["Title"] = "BusinessForm";
+}
+
+<h1>Lägg till annons</h1>
+
+<div class="col-md-4">
+    <form asp-action="BusinessForm">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <fieldset>
+            <legend>Företagsuppgifter</legend>
+            <div class="form-group">
+                <label asp-for="annonsor.an_namn" class="control-label"></label>
+                <input asp-for="annonsor.an_namn" class="form-control" />
+                <span asp-validation-for="annonsor.an_namn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="annonsor.an_orgnr" class="control-label"></label>
+                <input asp-for="annonsor.an_orgnr" class="form-control" />
+                <span asp-validation-for="annonsor.an_orgnr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="annonsor.an_telnr" class="control-label"></label>
+                <input asp-for="annonsor.an_telnr" class="form-control" />
+                <span asp-validation-for="annonsor.an_telnr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="annonsor.an_utadress" class="control-label"></label>
+                <input asp-for="annonsor.an_utadress" class="form-control" />
+                <span asp-validation-for="annonsor.an_utadress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="annonsor.an_postnr" class="control-label"></label>
+                <input asp-for="annonsor.an_postnr" class="form-control" />
+                <span asp-validation-for="annonsor.an_postnr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="annonsor.an_ort" class="control-label"></label>
+                <input asp-for="annonsor.an_ort" class="form-control" />
+                <span asp-validation-for="annonsor.an_ort" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="annonsor.an_f_utadress" class="control-label"></label>
+                <input asp-for="annonsor.an_f_utadress" class="form-control" />
+                <span asp-validation-for="annonsor.an_f_utadress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="annonsor.an_f_postnr" class="control-label"></label>
+                <input asp-for="annonsor.an_f_postnr" class="form-control" />
+                <span asp-validation-for="annonsor.an_f_postnr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="annonsor.an_f_ort" class="control-label"></label>
+                <input asp-for="annonsor.an_f_ort" class="form-control" />
+                <span asp-validation-for="annonsor.an_f_ort" class="text-danger"></span>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Annonsuppgifter</legend>
+            <div class="form-group">
+                <label asp-for="annons.ad_rubrik" class="control-label"></label>
+                <input asp-for="annons.ad_rubrik" class="form-control" />
+                <span asp-validation-for="annons.ad_rubrik" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="annons.ad_innehall" class="control-label"></label>
+                <input asp-for="annons.ad_innehall" class="form-control" />
+                <span asp-validation-for="annons.ad_innehall" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="annons.ad_varpris" class="control-label"></label>
+                <input asp-for="annons.ad_varpris" class="form-control" />
+                <span asp-validation-for="annons.ad_varpris" class="text-danger"></span>
+            </div>
+        </fieldset>
+        
+
+
+        <input type="submit" value="Skicka" class="btn btn-primary mt-2" />
+
+
+
+    </form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,97 @@
+﻿@model Lab2.Ads2.Models.ViewModelAdsPren
+
+@{
+    ViewData["Title"] = "PrenForm";
+}
+
+<h1>Lägg till annons</h1>
+
+<p>Fyll i samtliga uppgifter. Har vi felaktiga uppgifter om dig kan du uppdatera det här.</p>
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="PrenForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+               
+            <fieldset>
+                <legend>Personuppgifter</legend>
+                <div class="form-group">
+
+                    <label asp-for="pren.pr_fnamn" class="control-label"></label>
+                    <input asp-for="pren.pr_fnamn" class="form-control" />
+                    <span asp-validation-for="pren.pr_fnamn" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="pren.pr_efternamn" class="control-label"></label>
+                    <input asp-for="pren.pr_efternamn" class="form-control" />
+                    <span asp-validation-for="pren.pr_efternamn" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="pren.pr_telefonnr" class="control-label"></label>
+                    <input asp-for="pren.pr_telefonnr" class="form-control" />
+                    <span asp-validation-for="pren.pr_telefonnr" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="pren.pr_utadress" class="control-label"></label>
+                    <input asp-for="pren.pr_utadress" class="form-control" />
+                    <span asp-validation-for="pren.pr_utadress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="pren.pr_postnr" class="control-label"></label>
+                    <input asp-for="pren.pr_postnr" class="form-control" />
+                    <span asp-validation-for="pren.pr_postnr" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="pren.pr_ort" class="control-label"></label>
+                    <input asp-for="pren.pr_ort" class="form-control" />
+                    <span asp-validation-for="pren.pr_ort" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+
+
+                    <label asp-for="pren.pr_prennr" class="control-label"></label>
+                    <input asp-for="pren.pr_prennr" class="form-control" readonly />
+                    <span asp-validation-for="pren.pr_prennr" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+
+                    <label asp-for="pren.pr_personnr" class="control-label"></label>
+                    <input asp-for="pren.pr_personnr" class="form-control" readonly />
+                    <span asp-validation-for="pren.pr_personnr" class="text-danger"></span>
+                </div>
+
+            </fieldset>
+               
+            <fieldset>
+                <legend>Annonsuppgifter</legend>
+                <div class="form-group">
+                    <label asp-for="annons.ad_rubrik" class="control-label"></label>
+                    <input asp-for="annons.ad_rubrik" class="form-control" />
+                    <span asp-validation-for="annons.ad_rubrik" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="annons.ad_innehall" class="control-label"></label>
+                    <input asp-for="annons.ad_innehall" class="form-control" />
+                    <span asp-validation-for="annons.ad_innehall" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="annons.ad_varpris" class="control-label"></label>
+                    <input asp-for="annons.ad_varpris" class="form-control" />
+                    <span asp-validation-for="annons.ad_varpris" class="text-danger"></span>
+                </div>
+                <div class="form-group d-none">
+                    <label asp-for="annons.ad_prenr" class="control-label"></label>
+                    <input asp-for="annons.ad_prenr" class="form-control" value="@Model.pren.pr_prennr" type="hidden"/>
+                    <span asp-validation-for="annons.ad_prenr" class="text-danger"></span>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <input type="submit" value="Skicka" class="btn btn-primary" />
+            </div>
+        </form>
+
+    </div>
+</div>
+

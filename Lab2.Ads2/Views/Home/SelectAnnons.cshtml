@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Lab2.Ads2.Models.Annons>
+
+@{
+    ViewData["Title"] = "SelectAnnons";
+}
+
+<h1>Alla annonser</h1>
+
+<p>
+    <a asp-action="PrenCheck">Lägg till en ny annons</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ad_rubrik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ad_innehall)
+
+            </th>          
+            <th>
+                @Html.DisplayNameFor(model => model.ad_varpris)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.al_foretag)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ad_rubrik)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ad_innehall)
+
+            </td>         
+            <td>
+                @Html.DisplayFor(modelItem => item.ad_varpris)
+            </td>
+
+            <td>
+                @if (item.al_foretag == true) {
+                    <p>Företag</p>
+                } else {
+                    <p>Prenumerant</p>
+                }
+            </td>                    
+            
+        </tr>
+}
+    </tbody>
+</table>
