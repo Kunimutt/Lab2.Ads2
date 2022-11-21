@@ -18,9 +18,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.ad_innehall)
 
-            </th>          
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.ad_varpris)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ad_valuta)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.al_foretag)
@@ -29,28 +32,34 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ad_rubrik)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ad_innehall)
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ad_rubrik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ad_innehall)
 
-            </td>         
-            <td>
-                @Html.DisplayFor(modelItem => item.ad_varpris)
-            </td>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ad_varpris)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ad_valuta)
+                </td>
+                <td>
+                    @if (item.al_foretag == true)
+                    {
+                        <p>Företag</p>
+                    }
+                    else
+                    {
+                        <p>Prenumerant</p>
+                    }
+                </td>
 
-            <td>
-                @if (item.al_foretag == true) {
-                    <p>Företag</p>
-                } else {
-                    <p>Prenumerant</p>
-                }
-            </td>                    
-            
-        </tr>
-}
+            </tr>
+        }
     </tbody>
 </table>

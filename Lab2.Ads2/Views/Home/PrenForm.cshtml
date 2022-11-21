@@ -77,9 +77,16 @@
                     <span asp-validation-for="annons.ad_innehall" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="annons.ad_varpris" class="control-label"></label>
+                    <label asp-for="annons.ad_varpris" class="control-label">Varan eller tjänstens pris i kronor</label>
                     <input asp-for="annons.ad_varpris" class="form-control" />
                     <span asp-validation-for="annons.ad_varpris" class="text-danger"></span>
+                </div>
+                <div id="valuta" class="form-group">
+                    <label asp-for="annons.ad_valuta" class="control-label">Valuta som priset ska visas i</label>
+                    <select asp-for="annons.ad_valuta" class="form-select" id="annons.ad_valuta" name="annons.ad_valuta" asp-items=Model.ValutorSelectList>
+                    </select>
+                    <span asp-validation-for="annons.ad_valuta" class="text-danger"></span>
+
                 </div>
                 <div class="form-group d-none">
                     <label asp-for="annons.ad_prenr" class="control-label"></label>

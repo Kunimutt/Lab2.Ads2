@@ -28,6 +28,9 @@ namespace Lab2.Ads2.Models
         [Required]
         [DisplayName("Segment")]
         public bool? al_foretag { get; set; }
+        [Required]
+        [DisplayName("Valuta")]
+        public string ad_valuta { get; set; }
 
     }
 }

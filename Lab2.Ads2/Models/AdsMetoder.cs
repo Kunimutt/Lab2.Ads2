@@ -1,4 +1,4 @@
-﻿
+﻿using Lab2.Ads2.Models;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -17,14 +17,14 @@ namespace Lab2.Ads2.Models
 
             String selectSQL = "SELECT * FROM [tbl_ads]";
 
-            SqlCommand dbCommand = new SqlCommand(selectSQL, dbConnection);           
-           
+            SqlCommand dbCommand = new SqlCommand(selectSQL, dbConnection);
+
             SqlDataReader reader = null;
 
             List<Annons> alist = new List<Annons>();
             errormsg = "";
 
-            
+
             try
             {
                 dbConnection.Open();
@@ -33,24 +33,14 @@ namespace Lab2.Ads2.Models
                 while (reader.Read())
                 {
                     Annons a = new Annons();
-                    //if (reader["ad_prenr"] != DBNull.Value) {
-                    //    a.ad_prenr = 0;
-                    //}
-                    //else
-                    //{
-                    //    a.ad_prenr = Convert.ToInt32(reader["ad_prenr"]);
-                    //}
+
                     a.ad_rubrik = reader["ad_rubrik"].ToString();
                     a.ad_innehall = reader["ad_innehall"].ToString();
                     a.ad_varpris = Convert.ToInt32(reader["ad_varpris"]);
-
-                    //a.ad_orgnr = Convert.ToInt32(reader["ad_orgnr"]);
-                    //a.ad_prenr = Convert.ToInt32(reader["ad_prenr"]);
-                  
-
+                    a.ad_valuta = reader["ad_valuta"].ToString();
                     a.ad_pris = Convert.ToInt32(reader["ad_pris"]);
-                    
-                                        
+
+
                     alist.Add(a);
                 }
                 reader.Close();
@@ -75,17 +65,18 @@ namespace Lab2.Ads2.Models
             dbConnection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DBAds;Integrated Security=True"; // <- gå in på properties på databasen, under connection string
 
             // SQL-sträng
-            String insertSQL = "INSERT INTO [tbl_ads] ([ad_rubrik], [ad_innehall], [ad_prenr], [ad_varpris], [ad_pris]) VALUES (@rubrik, @innehall, @prenr, @varpris, 0)";
+            String insertSQL = "INSERT INTO [tbl_ads] ([ad_rubrik], [ad_innehall], [ad_prenr], [ad_varpris], [ad_pris], [ad_valuta]) VALUES (@rubrik, @innehall, @prenr, @varpris, 0, @valuta)";
 
-            
+
             // Lägg till en user
-            SqlCommand dbCommand = new SqlCommand(insertSQL, dbConnection);               
+            SqlCommand dbCommand = new SqlCommand(insertSQL, dbConnection);
 
 
             dbCommand.Parameters.Add("rubrik", SqlDbType.NVarChar, 50).Value = annons.ad_rubrik;
             dbCommand.Parameters.Add("innehall", SqlDbType.NVarChar, 50).Value = annons.ad_innehall;
             dbCommand.Parameters.Add("prenr", SqlDbType.Int).Value = annons.ad_prenr;
             dbCommand.Parameters.Add("varpris", SqlDbType.Int).Value = annons.ad_varpris;
+            dbCommand.Parameters.Add("valuta", SqlDbType.NVarChar, 10).Value = annons.ad_valuta;
 
             try
             {
@@ -118,7 +109,7 @@ namespace Lab2.Ads2.Models
 
             // SQL-sträng
             //String insertSQL = "INSERT INTO [tbl_ads] ([ad_rubrik], [ad_innehall], [ad_orgnr], [ad_varpris]) VALUES (@rubrik, @innehall, @orgnr, @varpris)";
-            String insertSQL = "AddAdsAndAnnonsor @orgnr, @namn, @telnr, @utadress, @postnr, @ort, @futadress, @fpostnr, @fort, @rubrik, @innehall, @varpris";
+            String insertSQL = "AddAdsAndAnnonsor2 @orgnr, @namn, @telnr, @utadress, @postnr, @ort, @futadress, @fpostnr, @fort, @rubrik, @innehall, @varpris, @valuta";
 
             // Lägg till en user
             SqlCommand dbCommand = new SqlCommand(insertSQL, dbConnection);
@@ -136,6 +127,7 @@ namespace Lab2.Ads2.Models
             dbCommand.Parameters.Add("fort", SqlDbType.NVarChar, 50).Value = annonsor.an_f_ort;
             dbCommand.Parameters.Add("postnr", SqlDbType.Int).Value = annonsor.an_postnr;
             dbCommand.Parameters.Add("fpostnr", SqlDbType.Int).Value = annonsor.an_f_postnr;
+            dbCommand.Parameters.Add("valuta", SqlDbType.NVarChar, 10).Value = annons.ad_valuta;
 
             try
             {

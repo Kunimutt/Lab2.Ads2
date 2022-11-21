@@ -1,0 +1,62 @@
+<Prenumeranter>
+  <Prenumerant id="1">
+    <Prenumerationsnummer>1</Prenumerationsnummer>
+    <Förnamn>Moa</Förnamn>
+    <Efternamn>Haldorson</Efternamn>
+    <Personnummer>1234567890</Personnummer>
+    <Telefonnummer>0760177019</Telefonnummer>
+    <Utdelningsadress>Brevbäraregatan 52</Utdelningsadress>
+    <Postnummer>70378</Postnummer>
+    <Ort>Örebro</Ort>
+  </Prenumerant>
+  <Prenumerant id="2">
+    <Prenumerationsnummer>2</Prenumerationsnummer>
+    <Förnamn>Bodil</Förnamn>
+    <Efternamn>Salminen</Efternamn>
+    <Personnummer>0987654321</Personnummer>
+    <Telefonnummer>0734589120</Telefonnummer>
+    <Utdelningsadress>Berghemsvägen 2</Utdelningsadress>
+    <Postnummer>90337</Postnummer>
+    <Ort>Umeå</Ort>
+  </Prenumerant>
+  <Prenumerant id="3">
+    <Prenumerationsnummer>3</Prenumerationsnummer>
+    <Förnamn>Tess</Förnamn>
+    <Efternamn>Merkel</Efternamn>
+    <Personnummer>9876543211</Personnummer>
+    <Telefonnummer>0771750075</Telefonnummer>
+    <Utdelningsadress>Stockholmsvägen 7</Utdelningsadress>
+    <Postnummer>12525</Postnummer>
+    <Ort>Stockholm</Ort>
+  </Prenumerant>
+  <Prenumerant id="4">
+    <Prenumerationsnummer>4</Prenumerationsnummer>
+    <Förnamn>Angelina</Förnamn>
+    <Efternamn>Jolie</Efternamn>
+    <Personnummer>7510581225</Personnummer>
+    <Telefonnummer>0771750076</Telefonnummer>
+    <Utdelningsadress>Malibu Road 1337</Utdelningsadress>
+    <Postnummer>85234</Postnummer>
+    <Ort>Malibu</Ort>
+  </Prenumerant>
+  <Prenumerant id="5">
+    <Prenumerationsnummer>5</Prenumerationsnummer>
+    <Förnamn>Brad</Förnamn>
+    <Efternamn>Pitt</Efternamn>
+    <Personnummer>6402425831</Personnummer>
+    <Telefonnummer>0771750077</Telefonnummer>
+    <Utdelningsadress>Malibu Road 1340</Utdelningsadress>
+    <Postnummer>85235</Postnummer>
+    <Ort>Malibu</Ort>
+  </Prenumerant>
+  <Prenumerant id="6">
+    <Prenumerationsnummer>6</Prenumerationsnummer>
+    <Förnamn>George</Förnamn>
+    <Efternamn>Clooney</Efternamn>
+    <Personnummer>5802425831</Personnummer>
+    <Telefonnummer>0771750078</Telefonnummer>
+    <Utdelningsadress>Malibu Road 1341</Utdelningsadress>
+    <Postnummer>85235</Postnummer>
+    <Ort>Malibu</Ort>
+  </Prenumerant>
+</Prenumeranter>

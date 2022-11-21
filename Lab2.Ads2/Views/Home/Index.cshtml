@@ -3,6 +3,11 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <h1 class="display-4">Välkommen</h1>
+    </br>
+    <p class="mb-5">Klicka på knapparna nedan för att navigera</p>
+    </br>
+    <div class="mt-5">
+        <a asp-action="ExportPren" class="btn btn-primary">Se alla prenumeranter</a> <a asp-action="TestAvInmatning" class="btn btn-primary">Importera XML-film med prenumeranter</a> <a asp-action="DownloadFile" class="btn btn-primary">Exportera XML-fil med prenumeranter</a>
+
+    </div>
