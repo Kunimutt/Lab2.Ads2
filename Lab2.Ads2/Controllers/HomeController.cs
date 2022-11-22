@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.IO.Pipes;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Xml;
@@ -35,7 +36,24 @@ namespace Lab2.Ads2.Controllers
             return View();
         }
 
-        public IActionResult SelectAnnons()
+        //public IActionResult SelectAnnons()
+        //{
+        //    List<Annons> annonser = new List<Annons>();
+        //    AdsMetoder am = new AdsMetoder();
+        //    string error = "";
+        //    annonser = am.SelectAnnonsLista(out error);
+        //    foreach (Annons annons in annonser)
+        //    {
+        //        if (annons.ad_pris == 40)
+        //        {
+        //            annons.al_foretag = true;
+        //        }
+        //    }
+
+        //    ViewBag.error = error;
+        //    return View(annonser);
+        //}
+        public async Task<IActionResult> SelectAnnons()
         {
             List<Annons> annonser = new List<Annons>();
             AdsMetoder am = new AdsMetoder();
@@ -43,16 +61,62 @@ namespace Lab2.Ads2.Controllers
             annonser = am.SelectAnnonsLista(out error);
             foreach (Annons annons in annonser)
             {
+
+                if (!annons.ad_valuta.Equals("SEK"))
+                {
+                    double result = await CurrencyChange2Async(annons.ad_valuta, annons.ad_varpris);
+                    annons.ad_convertedpris = result;
+                } else {
+                    annons.ad_convertedpris = annons.ad_varpris;
+
+                }
                 if (annons.ad_pris == 40)
                 {
                     annons.al_foretag = true;
                 }
             }
 
+
+
             ViewBag.error = error;
             return View(annonser);
         }
 
+
+
+
+        private async Task<double> CurrencyChange2Async(string valuta, double pris)
+        {
+            APIResponse resultresponse = new APIResponse();
+            double result = 0;
+            HttpClient client = new();
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic");
+            client.DefaultRequestHeaders.Add("apikey", "sRiyyGHa4Hrj7V7RGujqyqjVuhZlXauj"); //request.AddHeader("apikey", "sRiyyGHa4Hrj7V7RGujqyqjVuhZlXauj");
+
+
+
+            string newstring = "convert?to=" + valuta + "&from=SEK&amount=" + pris;
+
+            HttpResponseMessage responseMessage = await client.GetAsync("https://api.apilayer.com/exchangerates_data/" + newstring);
+
+            responseMessage.EnsureSuccessStatusCode();
+
+
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                string apiResponse = await responseMessage.Content.ReadAsStringAsync();
+                resultresponse = JsonConvert.DeserializeObject<APIResponse>(apiResponse);
+                result = resultresponse.result;
+
+            }
+
+
+
+            return result;
+        }
 
 
         //Radio är du prenumerant?
@@ -109,6 +173,15 @@ namespace Lab2.Ads2.Controllers
                 }
                 else
                 {
+                    var valutor = Valutor.GetAll();
+                    //var model = new ViewModelAdsPren();
+                    wmap.ValutorSelectList = new List<SelectListItem>();
+                    foreach (var valuta in valutor)
+                    {
+                        wmap.ValutorSelectList.Add(new SelectListItem { Text = valuta.valutanamn, Value = valuta.valutanamn });
+                    }
+                    //return View("PrenForm", model);
+
                     return View("PrenForm", wmap);
                 }
             }
@@ -126,7 +199,15 @@ namespace Lab2.Ads2.Controllers
         [HttpGet]
         public IActionResult PrenForm(Pren pren)
         {
-            return View(pren);
+            var valutor = Valutor.GetAll();
+            var model = new ViewModelAdsPren();
+            model.ValutorSelectList = new List<SelectListItem>();
+            foreach (var valuta in valutor)
+            {
+                model.ValutorSelectList.Add(new SelectListItem { Text = valuta.valutanamn, Value = valuta.valutanamn });
+            }
+            return View(model);
+            //return View(pren);
         }
 
 
@@ -245,7 +326,7 @@ namespace Lab2.Ads2.Controllers
                 pren = JsonConvert.DeserializeObject<List<Pren>>(apiResponse);
 
                 //CreateXMLFile();
-                AddRecordtoXMLfile(pren);
+                //AddRecordtoXMLfile(pren);
                 
                 //AddRecordtoXMLfileManualInput();
 
@@ -279,8 +360,8 @@ namespace Lab2.Ads2.Controllers
             XmlDocument doc = new XmlDocument();
             XmlElement root = doc.CreateElement("Prenumeranter");
             doc.AppendChild(root);
-            //doc.Save(@"C:\Users\bosa0003\source\repos\Lab2.Ads2\Lab2.Ads2\Demofil.xml");
-            doc.Save(@"C:\Users\bosa0003\source\repos\Lab2.Ads2\Lab2.Ads2\Prenumeranter.xml");
+            doc.Save(@"C:\Users\bosa0003\source\repos\Lab2.Ads2\Lab2.Ads2\Demofil.xml");
+            //doc.Save(@"C:\Users\bosa0003\source\repos\Lab2.Ads2\Lab2.Ads2\Prenumeranter.xml");
 
         }
 
@@ -332,8 +413,9 @@ namespace Lab2.Ads2.Controllers
         //Används för att fylla på en fil att använda vid test av import (är inte nödvändig)
         static void AddRecordtoXMLfileManualInput()
         {
+            DeleteXMLRecords();
             XmlDocument doc = new XmlDocument();
-            doc.Load(@"C:\Users\bosa0003\source\repos\Lab2.Ads2\Lab2.Ads2\Demofil.xml");
+            doc.Load(@"C:\Users\bosa0003\source\repos\Lab2.Ads2\Lab2.Ads2\NyImport.xml");
             XmlNode root = doc.SelectSingleNode("Prenumeranter");
 
             XmlElement pren = doc.CreateElement("Prenumerant");
@@ -341,35 +423,35 @@ namespace Lab2.Ads2.Controllers
             XmlAttribute id = doc.CreateAttribute("id");
             id.Value = doc.SelectNodes("Prenumeranter/Prenumerant").Count.ToString();
             pren.Attributes.Append(id);
-            XmlElement prennr = doc.CreateElement("Prenumerationsnummer");
-            prennr.InnerText = "7";
-            pren.AppendChild(prennr);
+            //XmlElement prennr = doc.CreateElement("Prenumerationsnummer");
+            //prennr.InnerText = "7";
+            //pren.AppendChild(prennr);
             XmlElement fnamn = doc.CreateElement("Förnamn");
-            fnamn.InnerText = "Julia";
+            fnamn.InnerText = "Vanessa";
             pren.AppendChild(fnamn);
             XmlElement enamn = doc.CreateElement("Efternamn");
-            enamn.InnerText = "Roberts";
+            enamn.InnerText = "Kirby";
             pren.AppendChild(enamn);
             XmlElement persnr = doc.CreateElement("Personnummer");
-            persnr.InnerText = "6802425831";
+            persnr.InnerText = "8804187862";
             pren.AppendChild(persnr);
             XmlElement telnr = doc.CreateElement("Telefonnummer");
-            telnr.InnerText = "0771750081";
+            telnr.InnerText = "0771257829";
             pren.AppendChild(telnr);
             XmlElement utadress = doc.CreateElement("Utdelningsadress");
-            utadress.InnerText = "Los Angesles road 73";
+            utadress.InnerText = "Queen road 5";
             pren.AppendChild(utadress);
             XmlElement postnr = doc.CreateElement("Postnummer");
-            postnr.InnerText = "78952";
+            postnr.InnerText = "27485";
             pren.AppendChild(postnr);
             XmlElement ort = doc.CreateElement("Ort");
-            ort.InnerText = "Los Angeles";
+            ort.InnerText = "Stockport";
             pren.AppendChild(ort);
 
-            doc.Save(@"C:\Users\bosa0003\source\repos\Lab2.Ads2\Lab2.Ads2\Demofil.xml");
+            doc.Save(@"C:\Users\bosa0003\source\repos\Lab2.Ads2\Lab2.Ads2\NyImport.xml");
 
         }
-
+       
         //Skapa formulär där person kan ladda upp fil för import av prenumeranter
         [HttpGet]
         public IActionResult TestAvInmatning()
@@ -405,7 +487,7 @@ namespace Lab2.Ads2.Controllers
             foreach (XmlNode node in nodes)
             {
                 Pren detail = new Pren();
-                detail.pr_prennr = Convert.ToInt32(node["Prenumerationsnummer"].InnerText);
+                //detail.pr_prennr = Convert.ToInt32(node["Prenumerationsnummer"].InnerText);
                 detail.pr_fnamn = node["Förnamn"].InnerText;
                 detail.pr_efternamn = node["Efternamn"].InnerText;
                 detail.pr_personnr = node["Personnummer"].InnerText;

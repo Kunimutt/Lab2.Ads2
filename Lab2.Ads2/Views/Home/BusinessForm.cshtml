@@ -79,7 +79,7 @@
             </div>
             <div id="valuta" class="form-group">
                 <label asp-for="annons.ad_valuta" class="control-label">Valuta som priset ska visas i</label>
-                <select asp-for="annons.ad_valuta" class="form-select" id="annons.ad_valuta" name="annons.ad_valuta" asp-items=Model.ValutorSelectList>
+                <select asp-for="annons.ad_valuta" class="form-select" id="annons.ad_valuta" name="annons.ad_valuta" asp-items=@Model.ValutorSelectList>
                 </select>
                 <span asp-validation-for="annons.ad_valuta" class="text-danger"></span>
 

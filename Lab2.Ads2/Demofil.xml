@@ -1,0 +1,20 @@
+<Prenumeranter>
+  <Prenumerant id="1">
+    <Förnamn>Olivia</Förnamn>
+    <Efternamn>Coleman</Efternamn>
+    <Personnummer>7401307862</Personnummer>
+    <Telefonnummer>077177829</Telefonnummer>
+    <Utdelningsadress>Picket street 3</Utdelningsadress>
+    <Postnummer>23485</Postnummer>
+    <Ort>Norwich</Ort>
+  </Prenumerant>
+  <Prenumerant id="2">
+    <Förnamn>Claire</Förnamn>
+    <Efternamn>Foy</Efternamn>
+    <Personnummer>8404167862</Personnummer>
+    <Telefonnummer>077897829</Telefonnummer>
+    <Utdelningsadress>Queen road 10</Utdelningsadress>
+    <Postnummer>27485</Postnummer>
+    <Ort>Stockport</Ort>
+  </Prenumerant>
+</Prenumeranter>

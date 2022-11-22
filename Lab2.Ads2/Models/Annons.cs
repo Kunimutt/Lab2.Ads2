@@ -32,5 +32,7 @@ namespace Lab2.Ads2.Models
         [DisplayName("Valuta")]
         public string ad_valuta { get; set; }
 
+        public double ad_convertedpris { get; set; }
+
     }
 }

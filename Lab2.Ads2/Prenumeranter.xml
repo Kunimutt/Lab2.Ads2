@@ -59,4 +59,34 @@
     <Postnummer>85235</Postnummer>
     <Ort>Malibu</Ort>
   </Prenumerant>
+  <Prenumerant id="7">
+    <Prenumerationsnummer>7</Prenumerationsnummer>
+    <Förnamn>Zendaya</Förnamn>
+    <Efternamn>Coleman</Efternamn>
+    <Personnummer>9609017862</Personnummer>
+    <Telefonnummer>0771750124</Telefonnummer>
+    <Utdelningsadress>High road 16</Utdelningsadress>
+    <Postnummer>94601</Postnummer>
+    <Ort>Oakland</Ort>
+  </Prenumerant>
+  <Prenumerant id="8">
+    <Prenumerationsnummer>8</Prenumerationsnummer>
+    <Förnamn>Kit</Förnamn>
+    <Efternamn>Connor</Efternamn>
+    <Personnummer>0409017862</Personnummer>
+    <Telefonnummer>0771750129</Telefonnummer>
+    <Utdelningsadress>Market place 8</Utdelningsadress>
+    <Postnummer>22485</Postnummer>
+    <Ort>Surrey</Ort>
+  </Prenumerant>
+  <Prenumerant id="9">
+    <Prenumerationsnummer>9</Prenumerationsnummer>
+    <Förnamn>Vanessa</Förnamn>
+    <Efternamn>Kirby</Efternamn>
+    <Personnummer>8804187862</Personnummer>
+    <Telefonnummer>0771257829</Telefonnummer>
+    <Utdelningsadress>Queen road 5</Utdelningsadress>
+    <Postnummer>27485</Postnummer>
+    <Ort>London</Ort>
+  </Prenumerant>
 </Prenumeranter>
